@@ -1,0 +1,64 @@
+CREATE TABLE fato_itens_prova (
+    NU_ANO INT NOT NULL,
+    CO_POSICAO INT NOT NULL,
+    SG_AREA CHAR(2) NOT NULL,
+    CO_ITEM INT NOT NULL,
+    TX_GABARITO CHAR(1) NOT NULL,
+    CO_HABILIDADE INT,
+    IN_ITEM_ABAN INT,
+    NU_PARAM_A DOUBLE,
+    NU_PARAM_B DOUBLE,
+    NU_PARAM_C DOUBLE,
+    CO_COR_PROVA INT,
+    CO_PROVA INT,
+    TP_LINGUA INT,
+    IN_ITEM_ADAPTADO INT,
+    TP_VERSAO_DIGITAL INT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO fato_itens_prova 
+SELECT 2020 'NU_ANO'
+      ,a.CO_POSICAO
+      ,a.SG_AREA
+      ,a.CO_ITEM
+      ,a.TX_GABARITO
+      ,a.CO_HABILIDADE
+      ,a.IN_ITEM_ABAN
+      ,a.NU_PARAM_A
+      ,a.NU_PARAM_B
+      ,a.NU_PARAM_C
+      ,b.CO_COR_PROVA
+      ,a.CO_PROVA
+      ,a.TP_LINGUA
+      ,a.IN_ITEM_ADAPTADO
+      ,a.TP_VERSAO_DIGITAL
+FROM itens_prova_2020 a
+LEFT JOIN dim_cor_prova b ON b.DESC_COR_PROVA = a.TX_COR
+WHERE CO_POSICAO IS NOT NULL
+  AND SG_AREA IS NOT NULL
+  AND CO_ITEM IS NOT NULL
+  AND TX_GABARITO IS NOT NULL
+
+ALTER TABLE fato_itens_prova
+ADD CONSTRAINT fk_area FOREIGN KEY (SG_AREA)
+REFERENCES dim_area_conhecimento(CO_AREA);
+
+ALTER TABLE fato_itens_prova
+ADD CONSTRAINT fk_item_abandono FOREIGN KEY (IN_ITEM_ABAN)
+REFERENCES dim_sim_ou_nao(CO_ZERO_UM);
+
+ALTER TABLE fato_itens_prova
+ADD CONSTRAINT fk_motivo_abandono FOREIGN KEY (IN_ITEM_ABAN)
+REFERENCES dim_motivo_abandono(CO_MOTIVO);
+
+ALTER TABLE fato_itens_prova
+ADD CONSTRAINT fk_item_adaptado FOREIGN KEY (IN_ITEM_ADAPTADO)
+REFERENCES dim_sim_ou_nao(CO_ZERO_UM);
+
+ALTER TABLE fato_itens_prova
+ADD CONSTRAINT fk_tp_lingua FOREIGN KEY (TP_LINGUA)
+REFERENCES dim_lingua_estrangeira(CO_IDIOMA);
+
+ALTER TABLE fato_itens_prova
+ADD CONSTRAINT fk_versao_digital FOREIGN KEY (TP_VERSAO_DIGITAL)
+REFERENCES dim_lingua_estrangeira(CO_IDIOMA);

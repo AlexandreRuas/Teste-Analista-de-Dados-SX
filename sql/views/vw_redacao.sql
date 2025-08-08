@@ -1,0 +1,12 @@
+CREATE VIEW vw_redacao AS
+SELECT a.NU_INSCRICAO    'INSCRICAO'
+      ,a.NU_ANO          'ANO'
+      ,b.DESC_STATUS     'STATUS_REDACAO'
+      ,a.NU_NOTA_COMP1   'NOTA_COMP_1'
+      ,a.NU_NOTA_COMP2   'NOTA_COMP_2'
+      ,a.NU_NOTA_COMP3   'NOTA_COMP_3'
+      ,a.NU_NOTA_COMP4   'NOTA_COMP_4'
+      ,a.NU_NOTA_COMP5   'NOTA_COMP_5'
+      ,a.NU_NOTA_REDACAO 'NOTA_REDACAO'
+FROM fato_redacao a
+LEFT JOIN dim_status_redacao b ON a.TP_STATUS_REDACAO = b.CO_STATUS;

@@ -1,0 +1,16 @@
+TIPO_ESCOLA;COD_DISCIPLINA;DISCIPLINA;QTD_NOTAS;MEDIA
+Não respondeu;CN;Ciências da Natureza;1781573;491.3
+Pública;CN;Ciências da Natureza;652544;473.47
+Privada;CN;Ciências da Natureza;163323;548.37
+Não respondeu;CH;Ciências Humanas;1896404;512.04
+Pública;CH;Ciências Humanas;691026;493.39
+Privada;CH;Ciências Humanas;166710;574.69
+Não respondeu;LC;Linguagens e Códigos;1896404;524.05
+Pública;LC;Linguagens e Códigos;691026;511.62
+Privada;LC;Linguagens e Códigos;166710;571.5
+Não respondeu;MT;Matemática;1781573;520.03
+Pública;MT;Matemática;652544;499.52
+Privada;MT;Matemática;163323;610.64
+Não respondeu;RD;Redação;1896404;569.29
+Pública;RD;Redação;691026;549.88
+Privada;RD;Redação;166710;717.8

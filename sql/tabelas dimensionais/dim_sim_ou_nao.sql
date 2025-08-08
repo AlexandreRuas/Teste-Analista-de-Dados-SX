@@ -1,0 +1,10 @@
+CREATE TABLE dim_sim_ou_nao (
+    CO_ZERO_UM int NOT NULL UNIQUE,
+    CO_A_B CHAR(1) NOT NULL UNIQUE,
+    RESPOSTA_SIM_NAO CHAR(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO dim_sim_ou_nao (CO_ZERO_UM, CO_A_B, RESPOSTA_SIM_NAO)
+VALUES
+    (0, 'A', 'Não'),
+    (1, 'B', 'Sim');

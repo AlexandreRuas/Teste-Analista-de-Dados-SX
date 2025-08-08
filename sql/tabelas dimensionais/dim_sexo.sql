@@ -1,0 +1,10 @@
+CREATE TABLE dim_sexo (
+    CO_SEXO CHAR(1) NOT NULL,
+    DESC_SEXO VARCHAR(50) NOT NULL,
+    PRIMARY KEY (CO_SEXO)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO dim_sexo (CO_SEXO, DESC_SEXO)
+VALUES
+    ('F', 'Feminino'),
+    ('M', 'Masculino');

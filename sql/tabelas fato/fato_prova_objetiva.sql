@@ -1,0 +1,105 @@
+CREATE TABLE fato_prova_objetiva (
+    NU_INSCRICAO BIGINT NOT NULL,
+    NU_ANO INT NOT NULL,
+    TP_PRESENCA_CN INT,
+    TP_PRESENCA_CH INT,
+    TP_PRESENCA_LC INT,
+    TP_PRESENCA_MT INT,
+    CO_PROVA_CN INT,
+    CO_PROVA_CH INT,
+    CO_PROVA_LC INT,
+    CO_PROVA_MT INT,
+    NU_NOTA_CN DOUBLE,
+    NU_NOTA_CH DOUBLE,
+    NU_NOTA_LC DOUBLE,
+    NU_NOTA_MT DOUBLE,
+    TX_RESPOSTAS_CN VARCHAR(100),
+    TX_RESPOSTAS_CH VARCHAR(100),
+    TX_RESPOSTAS_LC VARCHAR(100),
+    TX_RESPOSTAS_MT VARCHAR(100),
+    TP_LINGUA INT,
+    TX_GABARITO_CN VARCHAR(100),
+    TX_GABARITO_CH VARCHAR(100),
+    TX_GABARITO_LC VARCHAR(100),
+    TX_GABARITO_MT VARCHAR(100),
+    PRIMARY KEY (NU_INSCRICAO, NU_ANO)
+);
+
+INSERT INTO fato_prova_objetiva
+SELECT NU_INSCRICAO
+      ,NU_ANO
+      ,TP_PRESENCA_CN
+      ,TP_PRESENCA_CH
+      ,TP_PRESENCA_LC
+      ,TP_PRESENCA_MT
+      ,CO_PROVA_CN
+      ,CO_PROVA_CH
+      ,CO_PROVA_LC
+      ,CO_PROVA_MT
+      ,NU_NOTA_CN
+      ,NU_NOTA_CH
+      ,NU_NOTA_LC
+      ,NU_NOTA_MT
+      ,TX_RESPOSTAS_CN
+      ,TX_RESPOSTAS_CH
+      ,TX_RESPOSTAS_LC
+      ,TX_RESPOSTAS_MT
+      ,TP_LINGUA
+      ,TX_GABARITO_CN
+      ,TX_GABARITO_CH
+      ,TX_GABARITO_LC
+      ,TX_GABARITO_MT
+FROM microdados_enem_2020
+WHERE NU_INSCRICAO IS NOT NULL
+  AND NU_ANO IS NOT NULL
+
+ALTER TABLE fato_prova_objetiva
+ADD PRIMARY KEY (NU_INSCRICAO, NU_ANO);
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_presenca_cn FOREIGN KEY (TP_PRESENCA_CN)
+REFERENCES dim_presenca_prova_objetiva(CO_PRESENCA);
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_presenca_ch FOREIGN KEY (TP_PRESENCA_CH)
+REFERENCES dim_presenca_prova_objetiva(CO_PRESENCA);
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_presenca_lc FOREIGN KEY (TP_PRESENCA_LC)
+REFERENCES dim_presenca_prova_objetiva(CO_PRESENCA);
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_presenca_mt FOREIGN KEY (TP_PRESENCA_MT)
+REFERENCES dim_presenca_prova_objetiva(CO_PRESENCA);
+
+ALTER TABLE fato_prova_objetiva
+CHANGE CO_PROVA_CN CO_PROVA_CN int NULL;
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_tp_prova_cn FOREIGN KEY (CO_PROVA_CN)
+REFERENCES dim_tipo_prova_objetiva(CO_TIPO_PROVA);
+
+ALTER TABLE fato_prova_objetiva
+CHANGE CO_PROVA_CH CO_PROVA_CH int NULL;
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_tp_prova_ch FOREIGN KEY (CO_PROVA_CH)
+REFERENCES dim_tipo_prova_objetiva(CO_TIPO_PROVA);
+
+ALTER TABLE fato_prova_objetiva
+CHANGE CO_PROVA_LC CO_PROVA_LC int NULL;
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_tp_prova_lc FOREIGN KEY (CO_PROVA_LC)
+REFERENCES dim_tipo_prova_objetiva(CO_TIPO_PROVA);
+
+ALTER TABLE fato_prova_objetiva
+CHANGE CO_PROVA_MT CO_PROVA_MT int NULL;
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_tp_prova_mt FOREIGN KEY (CO_PROVA_MT)
+REFERENCES dim_tipo_prova_objetiva(CO_TIPO_PROVA);
+
+ALTER TABLE fato_prova_objetiva
+ADD CONSTRAINT fk_idioma FOREIGN KEY (TP_LINGUA)
+REFERENCES dim_lingua_estrangeira(CO_IDIOMA);

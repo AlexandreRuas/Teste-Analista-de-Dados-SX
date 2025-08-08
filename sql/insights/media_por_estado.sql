@@ -1,0 +1,18 @@
+DROP TABLE viz_media_por_estado
+
+-- Média das notas individuais e geral por estado
+CREATE TABLE viz_media_por_estado AS
+SELECT UF_PROVA
+      ,ROUND(AVG(NOTA_CN), 2)      'MEDIA_CN'
+      ,ROUND(AVG(NOTA_CH), 2)      'MEDIA_CH'
+      ,ROUND(AVG(NOTA_LC), 2)      'MEDIA_LC'
+      ,ROUND(AVG(NOTA_MT), 2)      'MEDIA_MT'
+      ,ROUND(AVG(NOTA_REDACAO), 2) 'MEDIA_REDACAO'
+      ,AVG((NOTA_CN + NOTA_CH + NOTA_LC + NOTA_MT + NOTA_REDACAO) / 5) 'MEDIA_GERAL'
+FROM vw_microdados
+WHERE NOTA_CN IS NOT NULL
+  AND NOTA_CH IS NOT NULL
+  AND NOTA_LC IS NOT NULL
+  AND NOTA_MT IS NOT NULL
+  AND NOTA_REDACAO IS NOT NULL
+GROUP BY UF_PROVA;
